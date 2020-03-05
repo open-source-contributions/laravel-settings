@@ -1,0 +1,39 @@
+{
+    "name": "raggitech/laravel-settings",
+    "description": "Laravel - Settings/Info For Model.",
+    "keywords": [
+        "php",
+        "laravel",
+        "settings",
+        "info"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Moamen Eltouny",
+            "email": "support@raggitech.com",
+            "homepage": "https://raggitech.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "laravel/framework": ">=6.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "RaggiTech\\Laravel\\Settings\\SettingsServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "RaggiTech\\Laravel\\Settings\\": "src"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
