@@ -195,7 +195,7 @@ $p2 = Page::withSettings('status')->get();
 $p3 = Page::withSettingsValue('status', true)->get();
 
 // Get every element has [facebook or twitter or all] settings.
-$p4 = Product::withAnySettings(['facebook', 'twitter'])->get();
+$p4 = Page::withAnySettings(['facebook', 'twitter'])->get();
 ```
 
 
