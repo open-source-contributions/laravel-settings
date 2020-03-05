@@ -2,7 +2,7 @@
 
 #  [![Latest Stable Version](https://poser.pugx.org/raggitech/laravel-settings/v/stable)](https://packagist.org/packages/raggitech/laravel-settings) [![Total Downloads](https://poser.pugx.org/raggitech/laravel-settings/downloads)](https://packagist.org/packages/raggitech/laravel-settings) [![License](https://poser.pugx.org/raggitech/laravel-settings/license)](https://packagist.org/packages/raggitech/laravel-settings)
 
-#### Laravel Settings/Info provides a quick and easy methods.
+#### Laravel Settings/Info provides a quick and easy methods (General/Model).
 
 ###### Example:
 
