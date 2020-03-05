@@ -24,7 +24,7 @@ Install the latest version using [Composer](https://getcomposer.org/):
 $ composer require raggitech/laravel-settings
 ```
 
-then publish the migration & config files
+then publish the migration & migrate 
 ```bash
 $ php artisan vendor:publish --tag=laravel-settings
 $ php artisan migrate
