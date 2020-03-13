@@ -14,7 +14,7 @@ trait hasSettings
         parent::__construct();
     }
 
-    private function getSetting(?string $name = null)
+    private function getSetting(string $name)
     {
         $setting = $this->settings->where('name', $name)->first();
         if (!$setting) return null;
@@ -25,33 +25,46 @@ trait hasSettings
     /**
      * Get Setting
      */
-    public function setting(string $name)
+    public function setting(string ...$name)
     {
-        $model = $this->getSetting($name);
-        if (!$model) return null;
+        $data = self::whereIn('name', $name);
+        if (count($name) == 1) {
+            $data = $data->first();
+            if (!$data) return null;
 
-        return $model->value;
+            return $data->value;
+        } else {
+            return $data->get()->keyBy('name');
+        }
     }
 
     /**
      * Create/Update Setting
      */
-    public function setSetting(string $name, ?string $value = null)
+    public function setSetting($name, ?string $value = null)
     {
-        $model  = $this->getSetting($name);
+        if (is_array($name)) {
+            foreach ($name as $n => $v) {
+                $this->setSetting($n, $v);
+            }
 
-        if (!$model) {
-            $obj = new Settings();
-            $obj->user_id       = auth()->check() ? auth()->user()->id : null;
-            $obj->model_type    = get_class($this);
-            $obj->model_id      = $this->{$this->primaryKey};
-            $obj->name          = $name;
-            $obj->value         = $value;
-
-            return $obj->save();
+            return true;
         } else {
-            // Update
-            return $model->update(['value' => $value]);
+            $model  = $this->getSetting($name);
+
+            if (!$model) {
+                $obj = new Settings();
+                $obj->user_id       = auth()->check() ? auth()->user()->id : null;
+                $obj->model_type    = get_class($this);
+                $obj->model_id      = $this->{$this->primaryKey};
+                $obj->name          = $name;
+                $obj->value         = $value;
+
+                return $obj->save();
+            } else {
+                // Update
+                return $model->update(['value' => $value]);
+            }
         }
     }
 

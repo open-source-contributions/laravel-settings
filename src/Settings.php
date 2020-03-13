@@ -12,21 +12,14 @@ class Settings extends Model
     protected $fillable = ['user_id', 'model_type', 'model_id', 'name', 'value'];
 
     /**
-     * Get Setting's Value || empty string
-     */
-    public function __toString()
-    {
-        return $this->value ?? '';
-    }
-
-    /**
      * Get Settings Value
      */
-    public static function get(?string $name = null)
+    public static function get(?string ...$name)
     {
-        if (!$name) return self::where('model_type', null)->where('model_id')->get();
+        if (empty($name)) return self::where('model_type', null)->where('model_id')->get()->keyBy('name');
 
-        return self::where('name', $name)->where('model_type', null)->where('model_id')->first();
+        $data = self::whereIn('name', $name)->where('model_type', null)->where('model_id');
+        return count($name) == 1 ? $data->first() : $data->get()->keyBy('name');
     }
 
     /**
@@ -73,7 +66,7 @@ class Settings extends Model
      */
     public static function clear()
     {
-        return self::where('model_type', null)->where('model_id')->delete();
+        return self::where('model_type', null)->where('model_id', null)->delete();
     }
 
     /**
