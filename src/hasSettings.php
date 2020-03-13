@@ -27,7 +27,7 @@ trait hasSettings
      */
     public function setting(string ...$name)
     {
-        $data = self::whereIn('name', $name);
+        $data = $this->settings->whereIn('name', $name);
         if (count($name) == 1) {
             $data = $data->first();
             if (!$data) return null;
